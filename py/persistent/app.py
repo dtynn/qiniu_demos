@@ -49,7 +49,7 @@ class ResultPageHdl(tornado.web.RequestHandler):
 
 class NotifyCallbackHdl(tornado.web.RequestHandler):
     def check_xsrf_cookie(self):
-        return
+        return True
 
     def get(self):
         self.post()
