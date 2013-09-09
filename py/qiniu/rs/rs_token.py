@@ -46,8 +46,8 @@ class PutPolicy(object):
 			token["endUser"] = self.endUser
 
 		if self.persistentOps is not None and self.persistentNotifyUrl is not None:
-			token["PersistentOps"] = self.persistentOps
-			token["PersistentNotifyUrl"] = self.persistentNotifyUrl
+			token["persistentOps"] = self.persistentOps
+			token["persistentNotifyUrl"] = self.persistentNotifyUrl
 		
 		b = json.dumps(token, separators=(',',':'))
 		return mac.sign_with_data(b)
