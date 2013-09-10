@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>预转状态</title>
+</head>
+<body>
+{% if success is True %}
+<h3>预转结果</h3>
+<p>id：{{ status.get('id') }}</p>
+<p>状态：{{ status.get('code') }}</p>
+<p>描述：{{ status.get('desc') }}</p>
+{% if status.get('items') %}
+<p><strong>单项处理结果</strong></p>
+{% for c, i in enumerate(status.get('items')) %}
+<p>{{ c+1 }}.</p>
+<p>处理命令：{{ i.get('cmd') }}</p>
+<p>处理状态：{{ i.get('code') }}</p>
+<p>详细内容：{{ i.get('desc') }}</p>
+<p>错误信息：{{ i.get('error') }}</p>
+{% end %}
+{% end %}
+{% else %}
+<p>{{ status }}</p>
+{% end %}
+</body>
+</html>

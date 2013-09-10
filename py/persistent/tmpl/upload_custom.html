@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>上传音视频文件</title>
+</head>
+<body>
+<form method="post" action="http://up.qiniu.com/" enctype="multipart/form-data">
+    <h3>上传音视频文件</h3>
+    <p>文件：</p>
+    <input type="file" name="file"><br>
+    <p>Token：</p>
+    <textarea name="token">{{ token }}</textarea>
+    <a href="/token">生成token</a><br>
+    <p><button type="submit">上传</button></p>
+</form>
+</body>
+<style type="text/css">
+    input[type=text], input[type=password] {
+        width: 300px;
+    }
+    textarea {
+        resize: none;
+        width: 300px;
+        height: 200px;
+        overflow-y: auto;
+    }
+</style>
+</html>

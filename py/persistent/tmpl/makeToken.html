@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>生成token</title>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<h3>当前的Token:</h3>
+<textarea>{{ token }}</textarea>
+<p><a href="/upload">返回上传</a></p>
+<div class="hr"></div>
+<form method="post" action="/make_token">
+    <h3>生成token</h3>
+    <div id="token_parameters">
+        <p>空间名：</p>
+        <input type="text" name="bucket"><br>
+        <p>Access Key：</p>
+        <input type="text" name="access_key"><br>
+        <p>Secret Key:</p><input type="password" name="secret_key"><br>
+        <p>预转操作：</p>
+        <div id="token_parameters_ops" style="display: inline">
+            <input type="text" name="ops">
+        </div>
+        <button type="button" id="addOps">增加预转操作</button><br>
+    </div>
+    <p><button type="submit">生成</button></p>
+</form>
+</body>
+<script type="text/javascript">
+    $(function(){
+        function addOps (){
+            var opsHtml = '<br><input type="text" name="ops">';
+            $('#token_parameters_ops').append(opsHtml);
+        }
+        $('#addOps').click(function(){
+            addOps();
+        })
+    });
+</script>
+<style type="text/css">
+    input[type=text], input[type=password] {
+        width: 300px;
+    }
+    textarea {
+        resize: none;
+        width: 300px;
+        height: 200px;
+        overflow-y: auto;
+    }
+    .hr {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid black;
+        margin: 10px 0;
+    }
+</style>
+</html>

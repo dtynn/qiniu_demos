@@ -10,6 +10,7 @@ from qiniu import conf, rs
 
 import tornado.ioloop
 import tornado.web
+import tornado.httpserver
 from tornado.httpserver import HTTPServer
 
 #http server
@@ -32,7 +33,7 @@ class UploadPageHdl(tornado.web.RequestHandler):
         policy.returnBody = 'etag=$(etag)&pid=$(persistentId)'
         #policy.callbackUrl = ''
         #policy.callbackBody = ''
-        policy.persistentOps = '"avthumb/mp3/ar/44100/ab/32k;avthumb/mp3/aq/6/ar/16000"'
+        policy.persistentOps = 'avthumb/mp3/ar/44100/ab/32k;avthumb/mp3/aq/6/ar/16000'
         policy.persistentNotifyUrl = ''
         uploadToken = policy.token()
         self.render('upload.html', token=uploadToken)
@@ -57,8 +58,9 @@ class NotifyCallbackHdl(tornado.web.RequestHandler):
 
     def post(self):
         print 'posted'
+        print self.request.headers
+        print self.request.body
         return
-
 
 settings = dict(
     debug=False,
