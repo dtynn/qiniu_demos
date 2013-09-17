@@ -184,9 +184,15 @@ class DownloadUrlHdl(tornado.web.RequestHandler):
         akey = self.get_argument('access_key', '')
         skey = self.get_argument('secret_key', '')
         if domain and key and akey and skey and expires:
+            if len(key.split('?', 1)) > 1:
+                key, fop = key.split('?', 1)
+            else:
+                key, fop = key, ''
             conf.ACCESS_KEY = str(akey)
             conf.SECRET_KEY = str(skey)
             url = rs.make_base_url(domain, key)
+            if fop:
+                url = '%s?%s' % (url, fop)
             policy = rs.GetPolicy()
             policy.expires = expires
             private_url = policy.make_request(url)
