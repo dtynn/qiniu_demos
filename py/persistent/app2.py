@@ -166,6 +166,29 @@ class StatusHdl(tornado.web.RequestHandler):
             return data
         return
 
+
+class DownloadUrlHdl(tornado.web.RequestHandler):
+    def get(self):
+        url = self.get_cookie('downloadUrl', '') or u'当前无链接'
+        self.render('downloadUrl.html', url=url)
+        return
+
+    def post(self):
+        bucket = self.get_argument('bucket', '')
+        key = self.get_argument('key', '')
+        akey = self.get_argument('access_key', '')
+        skey = self.get_argument('secret_key', '')
+        if bucket and key and akey and skey:
+            conf.ACCESS_KEY = str(akey)
+            conf.SECRET_KEY = str(skey)
+            domain = '%s.qiniudn.com' % (str(bucket),)
+            url = rs.make_base_url(domain, key)
+            policy = rs.GetPolicy()
+            private_url = policy.make_request(url)
+            self.set_cookie('downloadUrl', private_url)
+        self.redirect('/make_download_url')
+        return
+
 settings = dict(
     debug=False,
     #cookie_domain='',
@@ -182,6 +205,7 @@ urls = [
     (r'/result', ResultPageHdl),
     (r'/notify_cb', NotifyCallbackHdl),
     (r'/status', StatusHdl),
+    (r'/make_download_url', DownloadUrlHdl),
 ]
 
 app = tornado.web.Application(urls, **settings)

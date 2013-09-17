@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>生成下载token</title>
+</head>
+<body>
+<h3>私有资源下载地址：</h3>
+<textarea>{{ url }}</textarea>
+<form method="post" action="/make_download_url">
+    <h3>生成下载地址</h3>
+    <div id="token_parameters">
+        <p>空间名：</p>
+        <input type="text" name="bucket"><br>
+        <p>文件名：</p>
+        <input type="text" name="key"><br>
+        <p>Access Key：</p>
+        <input type="text" name="access_key"><br>
+        <p>Secret Key:</p><input type="password" name="secret_key"><br>
+    </div>
+    <p><button type="submit">生成</button></p>
+</form>
+</body>
+<style type="text/css">
+    input[type=text], input[type=password] {
+        width: 300px;
+    }
+    textarea {
+        resize: none;
+        width: 300px;
+        height: 200px;
+        overflow-y: auto;
+    }
+</style>
+</html>
