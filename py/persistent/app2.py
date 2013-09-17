@@ -174,16 +174,21 @@ class DownloadUrlHdl(tornado.web.RequestHandler):
         return
 
     def post(self):
-        bucket = self.get_argument('bucket', '')
+        domain = self.get_argument('domain', '')
+        try:
+            expires = int(self.get_argument('expires'))
+            assert expires > 0
+        except:
+            expires = 3600
         key = self.get_argument('key', '')
         akey = self.get_argument('access_key', '')
         skey = self.get_argument('secret_key', '')
-        if bucket and key and akey and skey:
+        if domain and key and akey and skey and expires:
             conf.ACCESS_KEY = str(akey)
             conf.SECRET_KEY = str(skey)
-            domain = '%s.qiniudn.com' % (str(bucket),)
             url = rs.make_base_url(domain, key)
             policy = rs.GetPolicy()
+            policy.expires = expires
             private_url = policy.make_request(url)
             self.set_cookie('downloadUrl', private_url)
         self.redirect('/make_download_url')

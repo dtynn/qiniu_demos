@@ -10,10 +10,12 @@
 <form method="post" action="/make_download_url">
     <h3>生成下载地址</h3>
     <div id="token_parameters">
-        <p>空间名：</p>
-        <input type="text" name="bucket"><br>
+        <p>绑定的域名：</p>
+        <input type="text" name="domain"><br>
         <p>文件名：</p>
         <input type="text" name="key"><br>
+        <p>过期时间：</p>
+        <input type="text" name="expires" value="3600"><br>
         <p>Access Key：</p>
         <input type="text" name="access_key"><br>
         <p>Secret Key:</p><input type="password" name="secret_key"><br>
